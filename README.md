@@ -13,6 +13,6 @@
 
 ---
 
-Currently experimenting with AI integration and local-first developer tools. Also run a music label for fun.
+Currently experimenting with AI integration and local-first developer tools.
 
 🎮 [itch.io](https://wedsmoker.itch.io/)
