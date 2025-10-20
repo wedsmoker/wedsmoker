@@ -1,5 +1,3 @@
-## Self-taught developer
-
 **Python • Rust • JavaScript** | Building tools for developers
 
 ### Live Projects
