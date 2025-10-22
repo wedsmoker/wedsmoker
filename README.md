@@ -1,6 +1,12 @@
 **Python • Rust • JavaScript** | Building tools for developers
+<!-- GITHUB_STATS:START -->
+<kbd>📊 158 clones</kbd> <kbd>👥 106 visitors</kbd> <kbd>⭐ 2 stars</kbd>
+<!-- GITHUB_STATS:END -->
 
 ### Live Projects
+
+
+
 - 🌐 [socialChat](https://socialchat-production.up.railway.app/) - Full-stack social platform with real-time chat (Node.js, Socket.io, PostgreSQL)
 - 🎵 [Music Resume](https://musicresume.up.railway.app/) - Generate business cards from your SoundCloud/Bandcamp
 
