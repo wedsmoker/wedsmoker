@@ -11,6 +11,7 @@
 
 - 🌐 [socialChat](https://socialchat-production.up.railway.app/) - Full-stack social platform with real-time chat (Node.js, Socket.io, PostgreSQL)
 - 🎵 [Music Resume](https://musicresume.up.railway.app/) - Generate business cards from your SoundCloud/Bandcamp
+- 💼 [Side Hustle Finder](https://side-hustle-finder-production.up.railway.app/) - Cloneable template for generating passive income with a referral site 
 
 ### Recent Work
 - 🔍 [Project Viewer](https://github.com/wedsmoker/Project-Viewer) - Web dashboard for code analysis with quality scoring
