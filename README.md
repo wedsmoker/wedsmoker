@@ -1,6 +1,6 @@
 **Python • Rust • JavaScript** | Building tools for developers
 <!-- GITHUB_STATS:START -->
-<kbd>last 2 weeks:</kbd> <kbd>📊 225 clones</kbd> <kbd>👥 139 visitors</kbd>
+<kbd>last 2 weeks:</kbd> <kbd>📊 240 clones</kbd> <kbd>👥 148 visitors</kbd>
 
 <kbd>all time:</kbd> <kbd>📦 15 repos</kbd> <kbd>⭐ 2 stars</kbd>
 <!-- GITHUB_STATS:END -->
