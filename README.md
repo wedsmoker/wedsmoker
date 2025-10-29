@@ -9,7 +9,8 @@
 
 
 
-- 🌐 [socialChat](https://socialchat-production.up.railway.app/) - Full-stack social platform with real-time chat (Node.js, Socket.io, PostgreSQL)
+- 🌐 [socialChat](https://socialchat-production.up.railway.app/) - Social platform with real-time chat (Node.js, Socket.io, PostgreSQL)
+- 🛒 [codeSale](https://codesale.up.railway.app/) - Code marketplace with GitHub integration (Next.js, FastAPI, Stripe)
 - 💼 [Side Hustle Finder](https://side-hustle-finder-production.up.railway.app/) - Cloneable template for generating passive income with a referral site 
 
 ### Recent Work
