@@ -34,6 +34,9 @@ def get_all_time_stats(username, token):
     recent_clones = 0
     recent_unique = 0
 
+    # Per-repo data for top 10
+    repo_stats = []
+
     for repo in repos:
         if repo['fork']:
             continue
@@ -49,8 +52,19 @@ def get_all_time_stats(username, token):
 
         if clone_response.status_code == 200:
             data = clone_response.json()
-            recent_clones += data.get('count', 0)
-            recent_unique += data.get('uniques', 0)
+            clones = data.get('count', 0)
+            uniques = data.get('uniques', 0)
+
+            recent_clones += clones
+            recent_unique += uniques
+
+            # Store per-repo data
+            repo_stats.append({
+                'name': repo_name,
+                'url': repo['html_url'],
+                'clones': clones,
+                'uniques': uniques
+            })
 
     return {
         'total_stars': total_stars,
@@ -58,7 +72,8 @@ def get_all_time_stats(username, token):
         'total_repos': total_repos,
         'recent_clones': recent_clones,
         'recent_unique': recent_unique,
-        'last_updated': datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')
+        'last_updated': datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC'),
+        'repo_stats': repo_stats
     }
 
 def generate_stats_section(stats):
@@ -123,6 +138,41 @@ def update_readme(stats, readme_path):
     print(f"Stats: {stats['recent_clones']} clones, {stats['recent_unique']} unique, {stats['total_stars']} stars")
     return True
 
+def write_github_summary(stats):
+    """Write top 10 repos to GitHub Actions job summary"""
+
+    # Check if running in GitHub Actions
+    summary_file = os.environ.get('GITHUB_STEP_SUMMARY')
+    if not summary_file:
+        print("\nNot running in GitHub Actions - skipping summary")
+        return
+
+    # Sort repos by clone count
+    repo_stats = stats.get('repo_stats', [])
+    top_repos = sorted(repo_stats, key=lambda x: x['clones'], reverse=True)[:10]
+
+    # Generate markdown summary
+    summary = "# 🔥 Top 10 Most Popular Repositories (Last 2 Weeks)\n\n"
+    summary += "| Rank | Repository | Clones | Unique Visitors |\n"
+    summary += "|:----:|:-----------|-------:|----------------:|\n"
+
+    medals = ['🥇', '🥈', '🥉']
+    for i, repo in enumerate(top_repos, 1):
+        rank = medals[i-1] if i <= 3 else str(i)
+        summary += f"| {rank} | **[{repo['name']}]({repo['url']})** | {repo['clones']:,} | {repo['uniques']:,} |\n"
+
+    summary += f"\n---\n"
+    summary += f"**Total across all repos:** {stats['recent_clones']:,} clones, {stats['recent_unique']:,} unique visitors\n"
+    summary += f"\n*Updated: {stats['last_updated']}*\n"
+
+    # Write to summary file
+    try:
+        with open(summary_file, 'a', encoding='utf-8') as f:
+            f.write(summary)
+        print("\n✓ GitHub Actions summary updated with top 10 repos!")
+    except Exception as e:
+        print(f"Failed to write summary: {e}")
+
 def main():
     if len(sys.argv) >= 4:
         username = sys.argv[1]
@@ -143,6 +193,7 @@ def main():
 
     if stats:
         update_readme(stats, readme_path)
+        write_github_summary(stats)
     else:
         print("Failed to fetch stats")
         sys.exit(1)
