@@ -6,14 +6,12 @@
 <!-- GITHUB_STATS:END -->
 
 ### Live Projects
-
-
-
 - 🌐 [socialChat](https://socialchat-production.up.railway.app/) - Social platform with real-time chat (Node.js, Socket.io, PostgreSQL)
 - 🛒 [codeSale](https://codesale.up.railway.app/) - Code marketplace with GitHub integration (Next.js, FastAPI, Stripe)
 - 💼 [Side Hustle Finder](https://side-hustle-finder-production.up.railway.app/) - Cloneable template for generating passive income with a referral site 
 
 ### Recent Work
+- 🎵 [Mood Detector](https://github.com/wedsmoker/Mood-Detector) - Free, local music intelligence API. Detect mood, tempo, energy, and key.
 - 🎮 [Itch.io Console Mode](https://wedsmoker.itch.io/itchio-console-mode) - Unofficial alternative game browser for Itch.io 
 - 🔍 [Project Viewer](https://github.com/wedsmoker/Project-Viewer) - Web dashboard for code analysis with quality scoring
 - 🦀 [CodeCraft](https://github.com/wedsmoker/CodeCraft) - Intelligent Python editor in Rust with tree-sitter AST parsing
