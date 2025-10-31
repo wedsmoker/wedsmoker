@@ -19,6 +19,8 @@
 
 ---
 
-Currently experimenting with AI integration and local-first developer tools.
+My other links...
 
 🎮 [itch.io](https://wedsmoker.itch.io/)
+
+🎵[Best Records Detroit](https://bestrecordsdetroit.bandcamp.com/)
