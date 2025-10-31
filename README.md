@@ -11,6 +11,7 @@
 - 💼 [Side Hustle Finder](https://side-hustle-finder-production.up.railway.app/) - Cloneable template for generating passive income with a referral site 
 
 ### Recent Work
+- 🎵 [Local Mood Player](https://github.com/wedsmoker/Music-Recommendation-Using-Facial-Expressions) - Local music player that detects your face emotions [fork of SGCODEX's repo](https://github.com/SGCODEX/Music-Recommendation-Using-Facial-Expressions) and plays your local library.
 - 🎵 [Mood Detector](https://github.com/wedsmoker/Mood-Detector) - Free, local music intelligence API. Detect mood, tempo, energy, and key.
 - 🎮 [Itch.io Console Mode](https://wedsmoker.itch.io/itchio-console-mode) - Unofficial alternative game browser for Itch.io 
 - 🔍 [Project Viewer](https://github.com/wedsmoker/Project-Viewer) - Web dashboard for code analysis with quality scoring
