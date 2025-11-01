@@ -82,7 +82,7 @@ def generate_stats_section(stats):
     section = f"""<!-- GITHUB_STATS:START -->
 <kbd>last 2 weeks:</kbd> <kbd>📊 {stats['recent_clones']:,} clones</kbd> <kbd>👥 {stats['recent_unique']:,} visitors</kbd>
 
-<kbd>all time:</kbd> <kbd>📦 {stats['total_repos']:,} repos</kbd> <kbd>🍴 {stats['total_forks']:,} forks</kbd> <kbd>⭐ {stats['total_stars']:,} stars</kbd>
+<kbd>all time:</kbd> <kbd>📦 {stats['total_repos']:,} repos</kbd> <kbd>⭐ {stats['total_stars']:,} stars</kbd>
 <!-- GITHUB_STATS:END -->"""
 
     return section
