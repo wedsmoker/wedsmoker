@@ -8,6 +8,12 @@ import sys
 import os
 from datetime import datetime
 
+def get_traffic_data(username, repo_name, traffic_type, headers):
+    """Helper function to fetch traffic data from GitHub API"""
+    url = f"https://api.github.com/repos/{username}/{repo_name}/traffic/{traffic_type}"
+    response = requests.get(url, headers=headers)
+    return response.json() if response.status_code == 200 else {}
+
 def get_all_time_stats(username, token):
     """Get all-time stats (stars, forks, repos) and recent clone/view data"""
 
@@ -45,26 +51,17 @@ def get_all_time_stats(username, token):
         total_stars += repo['stargazers_count']
         total_forks += repo['forks_count']
 
-        # Get recent clone data
         repo_name = repo['name']
-        clone_url = f"https://api.github.com/repos/{username}/{repo_name}/traffic/clones"
-        clone_response = requests.get(clone_url, headers=headers)
 
-        clones = 0
-        if clone_response.status_code == 200:
-            data = clone_response.json()
-            clones = data.get('count', 0)
-            recent_clones += clones
+        # Get traffic data using helper function
+        clone_data = get_traffic_data(username, repo_name, 'clones', headers)
+        view_data = get_traffic_data(username, repo_name, 'views', headers)
 
-        # Get recent visitor data (unique views)
-        view_url = f"https://api.github.com/repos/{username}/{repo_name}/traffic/views"
-        view_response = requests.get(view_url, headers=headers)
+        clones = clone_data.get('count', 0)
+        unique_views = view_data.get('uniques', 0)
 
-        unique_views = 0
-        if view_response.status_code == 200:
-            data = view_response.json()
-            unique_views = data.get('uniques', 0)
-            recent_visitors += unique_views
+        recent_clones += clones
+        recent_visitors += unique_views
 
         # Store per-repo data
         repo_stats.append({
