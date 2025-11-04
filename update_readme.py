@@ -9,7 +9,7 @@ import os
 from datetime import datetime
 
 def get_all_time_stats(username, token):
-    """Get all-time stats (stars, forks, repos) and recent clone data"""
+    """Get all-time stats (stars, forks, repos) and recent clone/view data"""
 
     headers = {
         'Authorization': f'token {token}',
@@ -32,7 +32,7 @@ def get_all_time_stats(username, token):
 
     # Recent stats (14 days)
     recent_clones = 0
-    recent_unique = 0
+    recent_visitors = 0
 
     # Per-repo data for top 10
     repo_stats = []
@@ -50,28 +50,36 @@ def get_all_time_stats(username, token):
         clone_url = f"https://api.github.com/repos/{username}/{repo_name}/traffic/clones"
         clone_response = requests.get(clone_url, headers=headers)
 
+        clones = 0
         if clone_response.status_code == 200:
             data = clone_response.json()
             clones = data.get('count', 0)
-            uniques = data.get('uniques', 0)
-
             recent_clones += clones
-            recent_unique += uniques
 
-            # Store per-repo data
-            repo_stats.append({
-                'name': repo_name,
-                'url': repo['html_url'],
-                'clones': clones,
-                'uniques': uniques
-            })
+        # Get recent visitor data (unique views)
+        view_url = f"https://api.github.com/repos/{username}/{repo_name}/traffic/views"
+        view_response = requests.get(view_url, headers=headers)
+
+        unique_views = 0
+        if view_response.status_code == 200:
+            data = view_response.json()
+            unique_views = data.get('uniques', 0)
+            recent_visitors += unique_views
+
+        # Store per-repo data
+        repo_stats.append({
+            'name': repo_name,
+            'url': repo['html_url'],
+            'clones': clones,
+            'visitors': unique_views
+        })
 
     return {
         'total_stars': total_stars,
         'total_forks': total_forks,
         'total_repos': total_repos,
         'recent_clones': recent_clones,
-        'recent_unique': recent_unique,
+        'recent_visitors': recent_visitors,
         'last_updated': datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC'),
         'repo_stats': repo_stats
     }
@@ -80,7 +88,7 @@ def generate_stats_section(stats):
     """Generate the stats badge section with kbd tags"""
 
     section = f"""<!-- GITHUB_STATS:START -->
-<kbd>last 2 weeks:</kbd> <kbd>📊 {stats['recent_clones']:,} clones</kbd> <kbd>👥 {stats['recent_unique']:,} visitors</kbd>
+<kbd>last 2 weeks:</kbd> <kbd>📊 {stats['recent_clones']:,} clones</kbd> <kbd>👥 {stats['recent_visitors']:,} visitors</kbd>
 
 <kbd>all time:</kbd> <kbd>📦 {stats['total_repos']:,} repos</kbd> <kbd>⭐ {stats['total_stars']:,} stars</kbd>
 <!-- GITHUB_STATS:END -->"""
@@ -134,8 +142,8 @@ def update_readme(stats, readme_path):
     with open(readme_path, 'w', encoding='utf-8') as f:
         f.write(new_content)
 
-    print(f"\n✓ README updated successfully!")
-    print(f"Stats: {stats['recent_clones']} clones, {stats['recent_unique']} unique, {stats['total_stars']} stars")
+    print(f"\nREADME updated successfully!")
+    print(f"Stats: {stats['recent_clones']} clones, {stats['recent_visitors']} visitors, {stats['total_stars']} stars")
     return True
 
 def write_github_summary(stats):
@@ -159,17 +167,17 @@ def write_github_summary(stats):
     medals = ['🥇', '🥈', '🥉']
     for i, repo in enumerate(top_repos, 1):
         rank = medals[i-1] if i <= 3 else str(i)
-        summary += f"| {rank} | **[{repo['name']}]({repo['url']})** | {repo['clones']:,} | {repo['uniques']:,} |\n"
+        summary += f"| {rank} | **[{repo['name']}]({repo['url']})** | {repo['clones']:,} | {repo['visitors']:,} |\n"
 
     summary += f"\n---\n"
-    summary += f"**Total across all repos:** {stats['recent_clones']:,} clones, {stats['recent_unique']:,} unique visitors\n"
+    summary += f"**Total across all repos:** {stats['recent_clones']:,} clones, {stats['recent_visitors']:,} unique visitors\n"
     summary += f"\n*Updated: {stats['last_updated']}*\n"
 
     # Write to summary file
     try:
         with open(summary_file, 'a', encoding='utf-8') as f:
             f.write(summary)
-        print("\n✓ GitHub Actions summary updated with top 10 repos!")
+        print("\nGitHub Actions summary updated with top 10 repos!")
     except Exception as e:
         print(f"Failed to write summary: {e}")
 
