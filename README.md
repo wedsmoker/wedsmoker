@@ -21,9 +21,6 @@
 - [![Local AI](https://img.shields.io/badge/Local_Mood_Player-Facial_Recognition-10b981?logo=opencv)](https://github.com/wedsmoker/Music-Recommendation-Using-Facial-Expressions) — Local music player that reads your face + plays matching tracks *(fork of SGCODEX)*
 - [![API](https://img.shields.io/badge/Mood_Detector-Local_API-14b8a6?logo=fastapi)](https://github.com/wedsmoker/Mood-Detector) — Free, offline music intelligence API: mood, tempo, energy, key
 - [![Game](https://img.shields.io/badge/Itch.io_Console_Mode-Unofficial-ef4444?logo=html5)](https://wedsmoker.itch.io/itchio-console-mode) — Console-inspired browser for Itch.io games
-- [![DevTool](https://img.shields.io/badge/Project_Viewer-Code_Dashboard-8b5cf6?logo=github)](https://github.com/wedsmoker/Project-Viewer) — Web dashboard for project scanning, quality scoring & dependency tracking
-- [![Editor](https://img.shields.io/badge/CodeCraft-Rust_Editor-f97316?logo=rust)](https://github.com/wedsmoker/CodeCraft) — Intelligent Python editor in Rust with tree-sitter AST analysis
-- [![Utility](https://img.shields.io/badge/Change_Logger-Diff_Backups-6b7280?logo=git)](https://github.com/wedsmoker/Change-Logger) — Compressed backups with visible, inspectable diffs
 
 ---
 
