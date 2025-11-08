@@ -15,6 +15,7 @@
 
 
 ### 🔬 Recent Work
+- [![DiaryML](https://img.shields.io/badge/DiaryML-Private_AI_Journal-f97316?logo=openai&logoColor=white)](https://github.com/wedsmoker/DiaryML) - Your thoughts stay yours. Encrypted AI journal with emotion tracking that runs entirely locally.
 - [![Research Feed](https://img.shields.io/badge/Research_Digest-arXiv_Automation-ff6b6b?logo=arxiv&logoColor=white)](https://github.com/wedsmoker/research-digest) - Stop drowning in papers. AI-curated arXiv feed with mobile
   scrolling + desktop deep-dives.
 - [![Research](https://img.shields.io/badge/💔_emotional--contamination-LLM_Research-8b5cf6)](https://github.com/wedsmoker/emotional-contamination) - Emotional context persists and affects AI reasoning across conversations.
