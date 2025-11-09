@@ -11,7 +11,6 @@
 
 ### 🚀 Live Projects
 - [![Website](https://img.shields.io/badge/socialChat-WebApp-10b981?logo=socket.io&logoColor=white)](https://socialchat.up.railway.app/) - Real-time artist-owned chat platform (Node.js, Socket.io, PostgreSQL)
-- [![Marketplace](https://img.shields.io/badge/codeSale-Marketplace-3b82f6?logo=next.js&logoColor=white)](https://codesale.up.railway.app/) - Code marketplace with GitHub integration (Next.js, FastAPI)
 
 
 ### 🔬 Recent Work
