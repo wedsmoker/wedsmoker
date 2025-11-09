@@ -11,6 +11,7 @@
 
 ### 🚀 Live Projects
 - [![Website](https://img.shields.io/badge/socialChat-WebApp-10b981?logo=socket.io&logoColor=white)](https://socialchat.up.railway.app/) - Real-time artist-owned chat platform (Node.js, Socket.io, PostgreSQL)
+- [![Website](https://img.shields.io/badge/moodTapes-Random_Mini_Albums-9333ea?logo=audiobook&logoColor=white)](https://o3o.up.railway.app/) - Randomized micro-albums from my tracks (FastAPI, Python)
 
 
 ### 🔬 Recent Work
