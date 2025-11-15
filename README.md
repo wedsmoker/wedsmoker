@@ -4,9 +4,9 @@
 **Building tools for developers**
 
 <!-- GITHUB_STATS:START -->
-<kbd>last 2 weeks:</kbd> <kbd>📊 419 clones</kbd> <kbd>👥 30 visitors</kbd>
+<kbd>last 2 weeks:</kbd> <kbd>📊 394 clones</kbd> <kbd>👥 27 visitors</kbd>
 
-<kbd>all time:</kbd> <kbd>📦 24 repos</kbd> <kbd>⭐ 3 stars</kbd>
+<kbd>all time:</kbd> <kbd>📦 25 repos</kbd> <kbd>⭐ 3 stars</kbd>
 <!-- GITHUB_STATS:END -->
 
 ### 🚀 Live Projects
