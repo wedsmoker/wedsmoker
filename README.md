@@ -10,12 +10,13 @@
 <!-- GITHUB_STATS:END -->
 
 ### 🚀 Live Projects
+- [![Portfolio](https://img.shields.io/badge/wwelsh.up-Portfolio-10b981?logo=web&logoColor=white)](https://wwelsh.up.railway.app/) - My central hub: all public repos, featured projects, and live demos in one place.
 - [![Website](https://img.shields.io/badge/socialChat-WebApp-10b981?logo=socket.io&logoColor=white)](https://socialchat.up.railway.app/) - Real-time artist-owned chat platform (Node.js, Socket.io, PostgreSQL)
 - [![Website](https://img.shields.io/badge/moodTapes-Random_Mini_Albums-9333ea?logo=audiobook&logoColor=white)](https://o3o.up.railway.app/) - Randomized micro-albums from my tracks (FastAPI, Python)
 
 
 ### 🔬 Recent Work
-- [![miniPaaS](https://img.shields.io/badge/miniPaaS-Self--Hosted_PaaS-3b82f6?logo=docker&logoColor=white)](https://github.com/wedsmoker/miniPaaS) – Deploy GitHub repos to `appname.localhost` with auto-builds, logs, and env management—no cloud required.
+- [![miniPaaS](https://img.shields.io/badge/miniPaaS-Self--Hosted_PaaS-3b82f6?logo=docker&logoColor=white)](https://github.com/wedsmoker/miniPaaS) - Deploy GitHub repos to `appname.localhost` with auto-builds, logs, and env management—no cloud required.
 - [![DiaryML](https://img.shields.io/badge/DiaryML-Private_AI_Journal-f97316?logo=openai&logoColor=white)](https://github.com/wedsmoker/DiaryML) - Your thoughts stay yours. Encrypted AI journal with emotion tracking that runs entirely locally.
 - [![Research Feed](https://img.shields.io/badge/Research_Digest-arXiv_Automation-ff6b6b?logo=arxiv&logoColor=white)](https://github.com/wedsmoker/research-digest) - Stop drowning in papers. AI-curated arXiv feed with mobile
   scrolling + desktop deep-dives.
