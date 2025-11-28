@@ -16,6 +16,7 @@
 
 
 ### 🔬 Recent Work
+- [![zweek](https://img.shields.io/badge/zweek-Lisp_IR_for_AI--to--C++-8b5cf6?logo=github&logoColor=white)](https://github.com/wedsmoker/zweek-lisp) - AI-friendly Lisp dialect that compiles to C++; lets tiny local LLMs generate correct, native code.
 - [![miniPaaS](https://img.shields.io/badge/miniPaaS-Self--Hosted_PaaS-3b82f6?logo=docker&logoColor=white)](https://github.com/wedsmoker/miniPaaS) - Deploy GitHub repos to `appname.localhost` with auto-builds, logs, and env management—no cloud required.
 - [![DiaryML](https://img.shields.io/badge/DiaryML-Private_AI_Journal-f97316?logo=openai&logoColor=white)](https://github.com/wedsmoker/DiaryML) - Your thoughts stay yours. Encrypted AI journal with emotion tracking that runs entirely locally.
 - [![Research Feed](https://img.shields.io/badge/Research_Digest-arXiv_Automation-ff6b6b?logo=arxiv&logoColor=white)](https://github.com/wedsmoker/research-digest) - Stop drowning in papers. AI-curated arXiv feed with mobile
