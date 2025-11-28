@@ -1,7 +1,8 @@
 <!-- Header Block -->
 [![Python](https://img.shields.io/badge/-Python-306998?logo=python&logoColor=white)](https://python.org) [![Rust](https://img.shields.io/badge/-Rust-2c2c2c?logo=rust&logoColor=white)](https://rust-lang.org) [![JavaScript](https://img.shields.io/badge/-JavaScript-f0db4f?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 <br>
-**Building tools for developers**
+
+**Building ethically grounded, offline-first tools for artists and developers.**
 
 <!-- GITHUB_STATS:START -->
 <kbd>last 2 weeks:</kbd> <kbd>📊 199 clones</kbd> <kbd>👥 32 visitors</kbd>
