@@ -16,6 +16,8 @@
 
 
 ### 🔬 Recent Work
+
+- [![alt text](https://img.shields.io/badge/Zweek_Code-Offline_AI_Assistant-8b5cf6?logo=c%2B%2B&logoColor=white)](https://github.com/wedsmoker/zweek-code) - Terminal-based coding agent that runs 100% offline. Orchestrates a local model swarm on your hardware.
 - [![zweek](https://img.shields.io/badge/zweek-Lisp_IR_for_AI--to--C++-8b5cf6?logo=github&logoColor=white)](https://github.com/wedsmoker/zweek-lisp) - AI-friendly Lisp dialect that compiles to C++; lets tiny local LLMs generate correct, native code.
 - [![miniPaaS](https://img.shields.io/badge/miniPaaS-Self--Hosted_PaaS-3b82f6?logo=docker&logoColor=white)](https://github.com/wedsmoker/miniPaaS) - Deploy GitHub repos to `appname.localhost` with auto-builds, logs, and env management—no cloud required.
 - [![DiaryML](https://img.shields.io/badge/DiaryML-Private_AI_Journal-f97316?logo=openai&logoColor=white)](https://github.com/wedsmoker/DiaryML) - Your thoughts stay yours. Encrypted AI journal with emotion tracking that runs entirely locally.
