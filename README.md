@@ -14,11 +14,11 @@
 <table>
   <tr>
     <td width="50%" valign="top">
-      <a href="https://wwelsh.up.railway.app/"><img src="https://img.shields.io/badge/wwelsh.up-Portfolio-10b981?logo=web&logoColor=white"></a><br>
+      <a href="https://wwel.sh"><img src="https://img.shields.io/badge/wwelsh.up-Portfolio-10b981?logo=web&logoColor=white"></a><br>
       My central hub: all public repos, featured projects, and live demos in one place.
     </td>
     <td width="50%" valign="top">
-       <a href="https://socialchat.up.railway.app/"><img src="https://img.shields.io/badge/socialChat-WebApp-10b981?logo=socket.io&logoColor=white"></a><br>
+       <a href="https://chat.wwel.sh/"><img src="https://img.shields.io/badge/socialChat-WebApp-10b981?logo=socket.io&logoColor=white"></a><br>
       Real-time artist-owned chat platform (Node.js, Socket.io, PostgreSQL)
     </td>
   </tr>
