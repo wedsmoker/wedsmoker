@@ -53,6 +53,7 @@ def get_all_repo_stats(username, token):
         view_data = get_traffic_data(username, repo_name, 'views', headers)
 
         clones = clone_data.get('count', 0)
+        unique_cloners = clone_data.get('uniques', 0)
         unique_views = view_data.get('uniques', 0)
 
         # Get description
@@ -63,6 +64,7 @@ def get_all_repo_stats(username, token):
             'name': repo_name,
             'url': repo['html_url'],
             'clones': clones,
+            'unique_cloners': unique_cloners,
             'visitors': unique_views,
             'description': description
         })
@@ -94,16 +96,16 @@ def generate_html_table(stats):
     # Top 10 by Clones
     html += '<h3>Most Cloned (last 2 weeks)</h3>\n'
     html += '<table border="1" cellpadding="3">\n'
-    html += '<tr><th>Rank</th><th>Repository</th><th>Description</th><th>Clones</th><th>Visitors</th></tr>\n'
+    html += '<tr><th>Rank</th><th>Repository</th><th>Description</th><th>Clones</th><th>Unique Cloners</th></tr>\n'
 
     for i, repo in enumerate(top_clones, 1):
         name = repo['name']
         url = repo['url']
         desc = repo['description'] if repo['description'] else 'No description'
         clones = repo['clones']
-        visitors = repo['visitors']
+        unique_cloners = repo['unique_cloners']
 
-        html += f'<tr><td>{i}</td><td><a href="{url}">{name}</a></td><td>{desc}</td><td>{clones}</td><td>{visitors}</td></tr>\n'
+        html += f'<tr><td>{i}</td><td><a href="{url}">{name}</a></td><td>{desc}</td><td>{clones}</td><td>{unique_cloners}</td></tr>\n'
 
     html += '</table>\n\n'
 
