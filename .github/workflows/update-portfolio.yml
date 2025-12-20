@@ -21,7 +21,7 @@ jobs:
       - name: Checkout portfolio repository
         uses: actions/checkout@v3
         with:
-          repository: usr-wwelsh/portfolio2
+          repository: usr-wwelsh/portfolio
           token: ${{ secrets.STATS_TOKEN }}
           path: portfolio
 
