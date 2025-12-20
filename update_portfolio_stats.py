@@ -84,11 +84,10 @@ def generate_html_table(stats):
     top_visitors = sorted(repo_stats, key=lambda x: x['visitors'], reverse=True)[:10]
 
     # Generate HTML table
-    html = '<!-- PORTFOLIO_STATS:START -->\n'
-    html += '<h2>TOP 10 REPOSITORIES (LAST 2 WEEKS)</h2>\n\n'
+    html = '<!-- PORTFOLIO_STATS:START -->\n\n'
 
     # Top 10 by Clones
-    html += '<h3>Most Cloned</h3>\n'
+    html += '<h3>Most Cloned (last 2 weeks)</h3>\n'
     html += '<table border="1" cellpadding="3">\n'
     html += '<tr><th>Rank</th><th>Repository</th><th>Description</th><th>Clones</th><th>Visitors</th></tr>\n'
 
@@ -104,7 +103,7 @@ def generate_html_table(stats):
     html += '</table>\n\n'
 
     # Top 10 by Unique Visitors
-    html += '<h3>Most Visited</h3>\n'
+    html += '<h3>Most Visited (last 2 weeks)</h3>\n'
     html += '<table border="1" cellpadding="3">\n'
     html += '<tr><th>Rank</th><th>Repository</th><th>Description</th><th>Visitors</th><th>Clones</th></tr>\n'
 
