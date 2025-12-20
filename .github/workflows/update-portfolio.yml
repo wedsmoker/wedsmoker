@@ -1,0 +1,59 @@
+name: Update Portfolio Stats
+
+on:
+  schedule:
+    # Runs every day at midnight UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual trigger from Actions tab
+
+jobs:
+  update-portfolio:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout stats repository
+        uses: actions/checkout@v3
+        with:
+          path: stats-repo
+
+      - name: Checkout portfolio repository
+        uses: actions/checkout@v3
+        with:
+          repository: usr-wwelsh/portfolio2
+          token: ${{ secrets.STATS_TOKEN }}
+          path: portfolio
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install requests
+
+      - name: Update portfolio with stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN }}
+          GITHUB_USERNAME: ${{ github.repository_owner }}
+        run: |
+          cd stats-repo
+          python update_portfolio_stats.py $GITHUB_USERNAME $GITHUB_TOKEN ../portfolio/index.html
+
+      - name: Commit and push portfolio changes
+        run: |
+          cd portfolio
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add index.html
+
+          # Check if there are changes
+          if ! git diff --quiet --staged; then
+            git commit -m "Update GitHub stats [skip ci]"
+            git push
+            echo "Portfolio updated successfully"
+          else
+            echo "No changes to commit"
+          fi
