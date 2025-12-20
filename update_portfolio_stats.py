@@ -67,9 +67,14 @@ def get_all_repo_stats(username, token):
             'description': description
         })
 
+    # Convert UTC to EST (UTC-5)
+    from datetime import timedelta
+    utc_time = datetime.utcnow()
+    est_time = utc_time - timedelta(hours=5)
+
     return {
         'repo_stats': repo_stats,
-        'last_updated': datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')
+        'last_updated': est_time.strftime('%Y-%m-%d %H:%M EST')
     }
 
 def generate_html_table(stats):
