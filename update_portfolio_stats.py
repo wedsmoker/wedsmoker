@@ -80,7 +80,7 @@ def get_all_repo_stats(username, token):
     }
 
 def generate_html_table(stats):
-    """Generate HTML table with top 10 repos by clones and unique visitors"""
+    """Generate HTML definition lists with top 10 repos by clones and unique visitors"""
 
     repo_stats = stats.get('repo_stats', [])
 
@@ -90,13 +90,11 @@ def generate_html_table(stats):
     # Get top 10 by unique visitors
     top_visitors = sorted(repo_stats, key=lambda x: x['visitors'], reverse=True)[:10]
 
-    # Generate HTML table
+    # Generate HTML
     html = '<!-- PORTFOLIO_STATS:START -->\n\n'
 
     # Top 10 by Clones
     html += '<h3>Most Cloned (last 2 weeks)</h3>\n'
-    html += '<table border="1" cellpadding="3">\n'
-    html += '<tr><th>Rank</th><th>Repository</th><th>Description</th><th>Clones</th><th>Unique Cloners</th></tr>\n'
 
     for i, repo in enumerate(top_clones, 1):
         name = repo['name']
@@ -105,14 +103,16 @@ def generate_html_table(stats):
         clones = repo['clones']
         unique_cloners = repo['unique_cloners']
 
-        html += f'<tr><td>{i}</td><td><a href="{url}">{name}</a></td><td>{desc}</td><td>{clones}</td><td>{unique_cloners}</td></tr>\n'
+        html += '<dl>\n'
+        html += f'  <dt><a href="{url}"><b>{name}</b></a></dt>\n'
+        html += f'  <dd>{desc}</dd>\n'
+        html += f'  <dd><small><i>Status: {clones} Clones / {unique_cloners} Unique Cloners</i></small></dd>\n'
+        html += '</dl>\n'
 
-    html += '</table>\n\n'
+    html += '\n'
 
     # Top 10 by Unique Visitors
     html += '<h3>Most Visited (last 2 weeks)</h3>\n'
-    html += '<table border="1" cellpadding="3">\n'
-    html += '<tr><th>Rank</th><th>Repository</th><th>Description</th><th>Visitors</th><th>Clones</th></tr>\n'
 
     for i, repo in enumerate(top_visitors, 1):
         name = repo['name']
@@ -121,9 +121,12 @@ def generate_html_table(stats):
         clones = repo['clones']
         visitors = repo['visitors']
 
-        html += f'<tr><td>{i}</td><td><a href="{url}">{name}</a></td><td>{desc}</td><td>{visitors}</td><td>{clones}</td></tr>\n'
+        html += '<dl>\n'
+        html += f'  <dt><a href="{url}"><b>{name}</b></a></dt>\n'
+        html += f'  <dd>{desc}</dd>\n'
+        html += f'  <dd><small><i>Status: {visitors} Visitors / {clones} Clones</i></small></dd>\n'
+        html += '</dl>\n'
 
-    html += '</table>\n'
     html += f'<p><small>Last updated: {stats["last_updated"]}</small></p>\n'
     html += '<!-- PORTFOLIO_STATS:END -->'
 
