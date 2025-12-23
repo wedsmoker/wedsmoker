@@ -139,7 +139,7 @@ def generate_html_table(stats):
         html += '</table>\n'
         html += '</blockquote>\n'
 
-    html += '<p align="right"><small>Last updated: {stats["last_updated"]}</small></p>\n'
+    html += f'<p align="right"><small>Last updated: {stats["last_updated"]}</small></p>\n'
     html += '<!-- PORTFOLIO_STATS:END -->'
 
     return html
