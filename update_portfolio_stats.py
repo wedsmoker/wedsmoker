@@ -103,13 +103,19 @@ def generate_html_table(stats):
         clones = repo['clones']
         unique_cloners = repo['unique_cloners']
 
+        html += '<blockquote>\n'
+        html += '<table width="100%" border="1" cellpadding="10" cellspacing="0" bgcolor="#ffffff">\n'
+        html += '<tr><td>\n'
         html += '<dl>\n'
         html += f'  <dt><a href="{url}"><b>{name}</b></a></dt>\n'
         html += f'  <dd>{desc}</dd>\n'
-        html += f'  <dd><small><i>Status: {clones} Clones / {unique_cloners} Unique Cloners</i></small></dd>\n'
+        html += f'  <dd><small><i>Status: <kbd>{clones} Clones</kbd> / <kbd>{unique_cloners} Unique Cloners</kbd></i></small></dd>\n'
         html += '</dl>\n'
+        html += '</td></tr>\n'
+        html += '</table>\n'
+        html += '</blockquote>\n'
 
-    html += '\n'
+    html += '<hr size="1" noshade>\n'
 
     # Top 10 by Unique Visitors
     html += '<h3>Most Visited (last 2 weeks)</h3>\n'
@@ -121,13 +127,19 @@ def generate_html_table(stats):
         clones = repo['clones']
         visitors = repo['visitors']
 
+        html += '<blockquote>\n'
+        html += '<table width="100%" border="1" cellpadding="10" cellspacing="0" bgcolor="#ffffff">\n'
+        html += '<tr><td>\n'
         html += '<dl>\n'
         html += f'  <dt><a href="{url}"><b>{name}</b></a></dt>\n'
         html += f'  <dd>{desc}</dd>\n'
-        html += f'  <dd><small><i>Status: {visitors} Visitors / {clones} Clones</i></small></dd>\n'
+        html += f'  <dd><small><i>Status: <kbd>{visitors} Visitors</kbd> / <kbd>{clones} Clones</kbd></i></small></dd>\n'
         html += '</dl>\n'
+        html += '</td></tr>\n'
+        html += '</table>\n'
+        html += '</blockquote>\n'
 
-    html += f'<p><small>Last updated: {stats["last_updated"]}</small></p>\n'
+    html += '<p align="right"><small>Last updated: {stats["last_updated"]}</small></p>\n'
     html += '<!-- PORTFOLIO_STATS:END -->'
 
     return html
