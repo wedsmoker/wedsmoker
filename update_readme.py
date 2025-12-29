@@ -44,7 +44,7 @@ def get_all_time_stats(username, token):
     repo_stats = []
 
     for repo in repos:
-        if repo['fork']:
+        if repo['fork'] or repo['private']:
             continue
 
         total_repos += 1

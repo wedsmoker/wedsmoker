@@ -42,7 +42,7 @@ def get_all_repo_stats(username, token):
     repo_stats = []
 
     for repo in repos:
-        if repo['fork']:
+        if repo['fork'] or repo['private']:
             continue
 
         repo_name = repo['name']
