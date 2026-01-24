@@ -5,7 +5,7 @@
 **Building ethically grounded, offline-first tools for artists and developers.**
 
 <!-- GITHUB_STATS:START -->
-<kbd>last 2 weeks:</kbd> <kbd>📊 353 clones</kbd> <kbd>👥 28 visitors</kbd>
+<kbd>last 2 weeks:</kbd> <kbd>📊 342 clones</kbd> <kbd>👥 28 visitors</kbd>
 
 <kbd>all time:</kbd> <kbd>📦 27 repos</kbd> <kbd>⭐ 5 stars</kbd>
 <!-- GITHUB_STATS:END -->
