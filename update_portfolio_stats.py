@@ -79,6 +79,17 @@ def get_all_repo_stats(username, token):
         'last_updated': est_time.strftime('%Y-%m-%d %H:%M EST')
     }
 
+def generate_clone_total_snippet(stats):
+    """Generate the inline clone total snippet"""
+    repo_stats = stats.get('repo_stats', [])
+    total_clones = sum(r['clones'] for r in repo_stats)
+    total_unique = sum(r['unique_cloners'] for r in repo_stats)
+    return (
+        f'<!-- CLONE_TOTAL:START -->'
+        f'<p><small><i>{total_clones:,} clones / {total_unique:,} unique cloners (last 2 weeks)</i></small></p>'
+        f'<!-- CLONE_TOTAL:END -->'
+    )
+
 def generate_html_table(stats):
     """Generate HTML definition lists with top 10 repos by clones and unique visitors"""
 
@@ -172,6 +183,16 @@ def update_portfolio(stats, portfolio_path):
         # Append at the end
         print("No existing stats section found, appending to end...")
         new_content = content.rstrip() + '\n\n' + new_section + '\n'
+
+    # Update clone total snippet
+    clone_start = '<!-- CLONE_TOTAL:START -->'
+    clone_end = '<!-- CLONE_TOTAL:END -->'
+    if clone_start in new_content and clone_end in new_content:
+        print("Updating clone total snippet...")
+        snippet = generate_clone_total_snippet(stats)
+        cs_idx = new_content.find(clone_start)
+        ce_idx = new_content.find(clone_end) + len(clone_end)
+        new_content = new_content[:cs_idx] + snippet + new_content[ce_idx:]
 
     # Write updated portfolio
     with open(portfolio_path, 'w', encoding='utf-8') as f:
