@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Safely updates README with GitHub stats badge section
-Uses HTML comments as markers to avoid breaking existing content
+Safely updates README with GitHub stats and full public repo list.
+Uses HTML comments as markers to avoid breaking existing content.
 """
 import requests
 import sys
 import os
 from datetime import datetime
+
 
 def get_traffic_data(username, repo_name, traffic_type, headers):
     """Helper function to fetch traffic data from GitHub API"""
@@ -14,8 +15,9 @@ def get_traffic_data(username, repo_name, traffic_type, headers):
     response = requests.get(url, headers=headers)
     return response.json() if response.status_code == 200 else {}
 
+
 def get_all_time_stats(username, token):
-    """Get all-time stats (stars, forks, repos) and recent clone/view data"""
+    """Get recent clone/view data and per-repo stats"""
 
     headers = {
         'Authorization': f'token {token}',
@@ -31,29 +33,19 @@ def get_all_time_stats(username, token):
 
     repos = response.json()
 
-    # All-time stats
-    total_stars = 0
-    total_forks = 0
-    total_repos = 0
-
-    # Recent stats (14 days)
     recent_clones = 0
     recent_visitors = 0
-
-    # Per-repo data for top 10
     repo_stats = []
 
     for repo in repos:
         if repo['fork'] or repo['private']:
             continue
 
-        total_repos += 1
-        total_stars += repo['stargazers_count']
-        total_forks += repo['forks_count']
-
         repo_name = repo['name']
+        created_at = repo['created_at'][:10]  # YYYY-MM-DD
+        description = repo.get('description', '') or ''
+        stars = repo['stargazers_count']
 
-        # Get traffic data using helper function
         clone_data = get_traffic_data(username, repo_name, 'clones', headers)
         view_data = get_traffic_data(username, repo_name, 'views', headers)
 
@@ -63,100 +55,111 @@ def get_all_time_stats(username, token):
         recent_clones += clones
         recent_visitors += unique_views
 
-        # Store per-repo data
         repo_stats.append({
             'name': repo_name,
             'url': repo['html_url'],
+            'created_at': created_at,
+            'description': description,
+            'stars': stars,
             'clones': clones,
             'visitors': unique_views
         })
 
     return {
-        'total_stars': total_stars,
-        'total_forks': total_forks,
-        'total_repos': total_repos,
         'recent_clones': recent_clones,
         'recent_visitors': recent_visitors,
         'last_updated': datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC'),
         'repo_stats': repo_stats
     }
 
+
 def generate_stats_section(stats):
-    """Generate the stats badge section with kbd tags"""
+    """Generate the stats kbd section"""
+    return (
+        f'<!-- GITHUB_STATS:START -->\n'
+        f'<kbd>last 2 weeks:</kbd> <kbd>📊 {stats["recent_clones"]:,} clones</kbd> <kbd>👥 {stats["recent_visitors"]:,} visitors</kbd>\n'
+        f'<!-- GITHUB_STATS:END -->'
+    )
 
-    section = f"""<!-- GITHUB_STATS:START -->
-<kbd>last 2 weeks:</kbd> <kbd>📊 {stats['recent_clones']:,} clones</kbd> <kbd>👥 {stats['recent_visitors']:,} visitors</kbd>
 
-<kbd>all time:</kbd> <kbd>📦 {stats['total_repos']:,} repos</kbd> <kbd>⭐ {stats['total_stars']:,} stars</kbd>
-<!-- GITHUB_STATS:END -->"""
+def generate_repo_list(stats):
+    """Generate the auto repo list table sorted by creation date, newest first"""
+    repo_stats = stats.get('repo_stats', [])
+    sorted_repos = sorted(repo_stats, key=lambda x: x['created_at'], reverse=True)
+    total = len(sorted_repos)
 
-    return section
+    lines = [
+        '<!-- AUTO_REPO_LIST:START -->',
+        f'### All Public Repositories ({total} total)',
+        '| Repository | Created | ⭐ | 📊 Clones (14d) | 👥 Visitors (14d) |',
+        '|:-----------|:-------:|---:|----------------:|------------------:|',
+    ]
+
+    for repo in sorted_repos:
+        name_cell = f'[{repo["name"]}]({repo["url"]})'
+        if repo['description']:
+            name_cell += f'<br><sub>{repo["description"]}</sub>'
+        lines.append(
+            f'| {name_cell} | {repo["created_at"]} | {repo["stars"]} | {repo["clones"]:,} | {repo["visitors"]:,} |'
+        )
+
+    lines.append('')
+    lines.append(f'*updated: {stats["last_updated"]} — sorted by creation date, newest first*')
+    lines.append('<!-- AUTO_REPO_LIST:END -->')
+
+    return '\n'.join(lines)
+
 
 def update_readme(stats, readme_path):
-    """Safely update README with stats section"""
+    """Safely update README with stats section and repo list"""
 
-    # Check if README exists
     if not os.path.exists(readme_path):
         print(f"Error: README not found at {readme_path}")
         return False
 
-    # Read existing README
     with open(readme_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # Generate new stats section
-    new_section = generate_stats_section(stats)
+    # Update GITHUB_STATS section
+    stats_start = '<!-- GITHUB_STATS:START -->'
+    stats_end = '<!-- GITHUB_STATS:END -->'
+    if stats_start in content and stats_end in content:
+        new_stats = generate_stats_section(stats)
+        start_idx = content.find(stats_start)
+        end_idx = content.find(stats_end) + len(stats_end)
+        content = content[:start_idx] + new_stats + content[end_idx:]
+        print("GITHUB_STATS section updated.")
 
-    # Markers for safe insertion
-    start_marker = '<!-- GITHUB_STATS:START -->'
-    end_marker = '<!-- GITHUB_STATS:END -->'
+    # Update AUTO_REPO_LIST section
+    repo_start = '<!-- AUTO_REPO_LIST:START -->'
+    repo_end = '<!-- AUTO_REPO_LIST:END -->'
+    if repo_start in content and repo_end in content:
+        new_repo_list = generate_repo_list(stats)
+        start_idx = content.find(repo_start)
+        end_idx = content.find(repo_end) + len(repo_end)
+        content = content[:start_idx] + new_repo_list + content[end_idx:]
+        print("AUTO_REPO_LIST section updated.")
 
-    if start_marker in content and end_marker in content:
-        # Replace existing section
-        print("Found existing stats section, updating...")
-        start_idx = content.find(start_marker)
-        end_idx = content.find(end_marker) + len(end_marker)
-        new_content = content[:start_idx] + new_section + content[end_idx:]
-    else:
-        # Insert at the top (after title if it exists)
-        print("No existing stats section found, inserting at top...")
-        lines = content.split('\n')
-
-        # Find where to insert (after first header or at beginning)
-        insert_idx = 0
-        for i, line in enumerate(lines):
-            if line.startswith('#'):
-                insert_idx = i + 1
-                break
-
-        # Insert the section
-        lines.insert(insert_idx, '')
-        lines.insert(insert_idx + 1, new_section)
-        lines.insert(insert_idx + 2, '')
-        new_content = '\n'.join(lines)
-
-    # Write updated README
     with open(readme_path, 'w', encoding='utf-8') as f:
-        f.write(new_content)
+        f.write(content)
 
     print(f"\nREADME updated successfully!")
-    print(f"Stats: {stats['recent_clones']} clones, {stats['recent_visitors']} visitors, {stats['total_stars']} stars")
+    print(f"Stats: {stats['recent_clones']:,} clones, {stats['recent_visitors']:,} visitors")
+    print(f"Repos: {len(stats['repo_stats'])} public repos listed")
     return True
+
 
 def write_github_summary(stats):
     """Write top 10 repos to GitHub Actions job summary"""
 
-    # Check if running in GitHub Actions
     summary_file = os.environ.get('GITHUB_STEP_SUMMARY')
     if not summary_file:
         print("\nNot running in GitHub Actions - skipping summary")
         return
 
-    # Sort repos by clone count
     repo_stats = stats.get('repo_stats', [])
     top_repos = sorted(repo_stats, key=lambda x: x['clones'], reverse=True)[:10]
 
-    # Generate markdown summary
     summary = "# 🔥 Top 10 Most Popular Repositories (Last 2 Weeks)\n\n"
     summary += "| Rank | Repository | Clones | Unique Visitors |\n"
     summary += "|:----:|:-----------|-------:|----------------:|\n"
@@ -170,13 +173,13 @@ def write_github_summary(stats):
     summary += f"**Total across all repos:** {stats['recent_clones']:,} clones, {stats['recent_visitors']:,} unique visitors\n"
     summary += f"\n*Updated: {stats['last_updated']}*\n"
 
-    # Write to summary file
     try:
         with open(summary_file, 'a', encoding='utf-8') as f:
             f.write(summary)
         print("\nGitHub Actions summary updated with top 10 repos!")
     except Exception as e:
         print(f"Failed to write summary: {e}")
+
 
 def main():
     if len(sys.argv) >= 4:
@@ -190,7 +193,6 @@ def main():
 
     if not username or not token:
         print("Usage: python update_readme.py <username> <token> <readme_path>")
-        print("Example: python update_readme.py wedsmoker ghp_xxx /path/to/README.md")
         sys.exit(1)
 
     print(f"Fetching GitHub stats for {username}...")
@@ -202,6 +204,7 @@ def main():
     else:
         print("Failed to fetch stats")
         sys.exit(1)
+
 
 if __name__ == '__main__':
     main()
