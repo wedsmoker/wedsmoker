@@ -9,33 +9,34 @@ import os
 from datetime import datetime
 
 
-LANGUAGE_BADGES = {
-    'Python':     ('306998', 'python'),
-    'JavaScript': ('f0db4f', 'javascript'),
-    'TypeScript': ('3178c6', 'typescript'),
-    'Rust':       ('2c2c2c', 'rust'),
-    'Kotlin':     ('7F52FF', 'kotlin'),
-    'C++':        ('00599C', 'c%2B%2B'),
-    'C':          ('A8B9CC', 'c'),
-    'Go':         ('00ADD8', 'go'),
-    'HTML':       ('e34f26', 'html5'),
-    'CSS':        ('1572b6', 'css3'),
-    'Shell':      ('4EAA25', 'gnubash'),
-    'Lua':        ('2C2D72', 'lua'),
-    'Java':       ('ED8B00', 'openjdk'),
-    'Zig':        ('F7A41D', 'zig'),
-    'Vue':        ('4FC08D', 'vuedotjs'),
-    'Svelte':     ('FF3E00', 'svelte'),
-    'Dockerfile': ('2496ED', 'docker'),
-    'Nix':        ('5277C3', 'nixos'),
-    'GDScript':   ('478CBF', 'godotengine'),
+_DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons'
+
+LANGUAGE_ICONS = {
+    'Python':     f'{_DEVICON}/python/python-original.svg',
+    'JavaScript': f'{_DEVICON}/javascript/javascript-original.svg',
+    'TypeScript': f'{_DEVICON}/typescript/typescript-original.svg',
+    'Rust':       f'{_DEVICON}/rust/rust-original.svg',
+    'Kotlin':     f'{_DEVICON}/kotlin/kotlin-original.svg',
+    'C++':        f'{_DEVICON}/cplusplus/cplusplus-original.svg',
+    'C':          f'{_DEVICON}/c/c-original.svg',
+    'Go':         f'{_DEVICON}/go/go-original.svg',
+    'HTML':       f'{_DEVICON}/html5/html5-original.svg',
+    'CSS':        f'{_DEVICON}/css3/css3-original.svg',
+    'Shell':      f'{_DEVICON}/bash/bash-original.svg',
+    'Lua':        f'{_DEVICON}/lua/lua-original.svg',
+    'Java':       f'{_DEVICON}/java/java-original.svg',
+    'Dart':       f'{_DEVICON}/dart/dart-original.svg',
+    'Zig':        f'{_DEVICON}/zig/zig-original.svg',
+    'Vue':        f'{_DEVICON}/vuejs/vuejs-original.svg',
+    'Svelte':     f'{_DEVICON}/svelte/svelte-original.svg',
+    'GDScript':   f'{_DEVICON}/godot/godot-original.svg',
 }
 
 def language_badge(language):
-    if not language or language not in LANGUAGE_BADGES:
+    if not language or language not in LANGUAGE_ICONS:
         return ''
-    color, logo = LANGUAGE_BADGES[language]
-    return f'![{language}](https://img.shields.io/badge/--{color}?logo={logo}&logoColor=white&style=flat-square)'
+    url = LANGUAGE_ICONS[language]
+    return f'<img src="{url}" width="16" height="16">'
 
 
 def get_traffic_data(username, repo_name, traffic_type, headers):
