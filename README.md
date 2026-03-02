@@ -2,9 +2,12 @@
   
 ![header](https://capsule-render.vercel.app/api?type=waving&color=7F52FF&height=200&section=header&text=William%20Welsh&fontSize=70&fontColor=ffffff&animation=fadeIn)
 
-*Building ethically grounded, offline-first tools for artists and developers.*
 
-[![Python](https://img.shields.io/badge/Python-306998?style=flat-square&logo=python&logoColor=white)](https://python.org) [![JavaScript](https://img.shields.io/badge/JavaScript-f0db4f?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org) [![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)](https://isocpp.org) [![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](https://kotlinlang.org) [![Rust](https://img.shields.io/badge/Rust-2c2c2c?style=flat-square&logo=rust&logoColor=white)](https://rust-lang.org)
+*Software ownership shouldn't cost money.*
+
+*Free, open, offline-first tools for the post-cloud era.*
+
+*No gatekeepers. No paywalls.*
 
 <br>
 
@@ -15,6 +18,8 @@
 <!-- GITHUB_STATS:START -->
 `📡 Stats (last 14d):` `📊 1,224 clones` `👥 38 visitors`
 <!-- GITHUB_STATS:END -->
+
+[![Python](https://img.shields.io/badge/Python-306998?style=flat-square&logo=python&logoColor=white)](https://python.org) [![JavaScript](https://img.shields.io/badge/JavaScript-f0db4f?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org) [![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)](https://isocpp.org) [![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](https://kotlinlang.org) [![Rust](https://img.shields.io/badge/Rust-2c2c2c?style=flat-square&logo=rust&logoColor=white)](https://rust-lang.org)
 
 </div>
 
