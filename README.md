@@ -1,6 +1,6 @@
 <div align="center">
-
-# 🪴 usr-wwelsh
+  
+![header](https://capsule-render.vercel.app/api?type=waving&color=7F52FF&height=200&section=header&text=William%20Welsh&fontSize=70&fontColor=ffffff&animation=fadeIn)
 
 *Building ethically grounded, offline-first tools for artists and developers.*
 
