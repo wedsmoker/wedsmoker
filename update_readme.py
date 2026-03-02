@@ -32,11 +32,13 @@ LANGUAGE_ICONS = {
     'GDScript':   f'{_DEVICON}/godot/godot-original.svg',
 }
 
-def language_badge(language):
-    if not language or language not in LANGUAGE_ICONS:
-        return ''
-    url = LANGUAGE_ICONS[language]
-    return f'<img src="{url}" width="16" height="16">'
+def language_badges(languages):
+    """Return img tags for up to 3 known languages, in order of usage"""
+    badges = []
+    for lang in languages[:3]:
+        if lang in LANGUAGE_ICONS:
+            badges.append(f'<img src="{LANGUAGE_ICONS[lang]}" width="16" height="16">')
+    return ' '.join(badges)
 
 
 def get_traffic_data(username, repo_name, traffic_type, headers):
@@ -75,10 +77,15 @@ def get_all_time_stats(username, token):
         created_at = repo['created_at'][:10]  # YYYY-MM-DD
         description = repo.get('description', '') or ''
         stars = repo['stargazers_count']
-        language = repo.get('language', '') or ''
+        language = repo.get('language', '') or ''  # fallback if languages API fails
 
         clone_data = get_traffic_data(username, repo_name, 'clones', headers)
         view_data = get_traffic_data(username, repo_name, 'views', headers)
+        lang_response = requests.get(
+            f'https://api.github.com/repos/{username}/{repo_name}/languages',
+            headers=headers
+        )
+        languages = list(lang_response.json().keys()) if lang_response.status_code == 200 else [language]
 
         clones = clone_data.get('count', 0)
         unique_views = view_data.get('uniques', 0)
@@ -94,7 +101,7 @@ def get_all_time_stats(username, token):
             'stars': stars,
             'clones': clones,
             'visitors': unique_views,
-            'language': language
+            'languages': languages
         })
 
     return {
@@ -128,8 +135,8 @@ def generate_repo_list(stats):
     ]
 
     for repo in sorted_repos:
-        badge = language_badge(repo['language'])
-        name_cell = f'{badge} [{repo["name"]}]({repo["url"]})' if badge else f'[{repo["name"]}]({repo["url"]})'
+        badges = language_badges(repo['languages'])
+        name_cell = f'{badges} [{repo["name"]}]({repo["url"]})' if badges else f'[{repo["name"]}]({repo["url"]})'
         if repo['description']:
             name_cell += f'<br><sub>{repo["description"]}</sub>'
         lines.append(
