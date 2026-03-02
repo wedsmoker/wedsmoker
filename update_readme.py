@@ -77,7 +77,7 @@ def generate_stats_section(stats):
     """Generate the stats kbd section"""
     return (
         f'<!-- GITHUB_STATS:START -->\n'
-        f'<kbd>last 2 weeks:</kbd> <kbd>📊 {stats["recent_clones"]:,} clones</kbd> <kbd>👥 {stats["recent_visitors"]:,} visitors</kbd>\n'
+        f'`📡 Stats (last 14d):` `📊 {stats["recent_clones"]:,} clones` `👥 {stats["recent_visitors"]:,} visitors`\n'
         f'<!-- GITHUB_STATS:END -->'
     )
 

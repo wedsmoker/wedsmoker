@@ -1,29 +1,24 @@
-<!-- Header Block -->
-[![Python](https://img.shields.io/badge/-Python-306998?logo=python&logoColor=white)](https://python.org) [![JavaScript](https://img.shields.io/badge/-JavaScript-f0db4f?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![TypeScript](https://img.shields.io/badge/-TypeScript-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org) [![C++](https://img.shields.io/badge/-C++-00599C?logo=c%2B%2B&logoColor=white)](https://isocpp.org) [![Kotlin](https://img.shields.io/badge/-Kotlin-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org) [![Rust](https://img.shields.io/badge/-Rust-2c2c2c?logo=rust&logoColor=white)](https://rust-lang.org)
+<div align="center">
+
+# 🪴 usr-wwelsh
+
+*Building ethically grounded, offline-first tools for artists and developers.*
+
+[![Python](https://img.shields.io/badge/Python-306998?style=flat-square&logo=python&logoColor=white)](https://python.org) [![JavaScript](https://img.shields.io/badge/JavaScript-f0db4f?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org) [![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)](https://isocpp.org) [![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](https://kotlinlang.org) [![Rust](https://img.shields.io/badge/Rust-2c2c2c?style=flat-square&logo=rust&logoColor=white)](https://rust-lang.org)
+
 <br>
 
-~~~
-Building ethically grounded, offline-first tools for artists and developers.
-~~~
+[🌐 wwel.sh](https://wwel.sh) • [💻 Git](https://git.wwel.sh) •[💬 Chat](https://chat.wwel.sh) • [🎨 Gallery](https://gallery.wwel.sh) • [✉️ Email](mailto:hello@wwel.sh)
+
+<br>
 
 <!-- GITHUB_STATS:START -->
-<kbd>last 2 weeks:</kbd> <kbd>📊 1,198 clones</kbd> <kbd>👥 37 visitors</kbd>
+`📡 Stats (last 14d):` `📊 1,198 clones` `👥 37 visitors`
 <!-- GITHUB_STATS:END -->
-~~~
-https://wwel.sh
-~~~
-~~~
-https://git.wwel.sh
-~~~
-~~~
-https://chat.wwel.sh
-~~~
-~~~
-https://gallery.wwel.sh
-~~~
-~~~
-hello@wwel.sh
-~~~
+
+</div>
+
+
 <!-- AUTO_REPO_LIST:START -->
 ### All Public Repositories (33 total)
 | Repository | Created | ⭐ | 📊 Clones (14d) | 👥 Visitors (14d) |
