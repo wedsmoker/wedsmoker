@@ -9,6 +9,35 @@ import os
 from datetime import datetime
 
 
+LANGUAGE_BADGES = {
+    'Python':     ('306998', 'python'),
+    'JavaScript': ('f0db4f', 'javascript'),
+    'TypeScript': ('3178c6', 'typescript'),
+    'Rust':       ('2c2c2c', 'rust'),
+    'Kotlin':     ('7F52FF', 'kotlin'),
+    'C++':        ('00599C', 'c%2B%2B'),
+    'C':          ('A8B9CC', 'c'),
+    'Go':         ('00ADD8', 'go'),
+    'HTML':       ('e34f26', 'html5'),
+    'CSS':        ('1572b6', 'css3'),
+    'Shell':      ('4EAA25', 'gnubash'),
+    'Lua':        ('2C2D72', 'lua'),
+    'Java':       ('ED8B00', 'openjdk'),
+    'Zig':        ('F7A41D', 'zig'),
+    'Vue':        ('4FC08D', 'vuedotjs'),
+    'Svelte':     ('FF3E00', 'svelte'),
+    'Dockerfile': ('2496ED', 'docker'),
+    'Nix':        ('5277C3', 'nixos'),
+    'GDScript':   ('478CBF', 'godotengine'),
+}
+
+def language_badge(language):
+    if not language or language not in LANGUAGE_BADGES:
+        return ''
+    color, logo = LANGUAGE_BADGES[language]
+    return f'![{language}](https://img.shields.io/badge/--{color}?logo={logo}&logoColor=white&style=flat-square)'
+
+
 def get_traffic_data(username, repo_name, traffic_type, headers):
     """Helper function to fetch traffic data from GitHub API"""
     url = f"https://api.github.com/repos/{username}/{repo_name}/traffic/{traffic_type}"
@@ -45,6 +74,7 @@ def get_all_time_stats(username, token):
         created_at = repo['created_at'][:10]  # YYYY-MM-DD
         description = repo.get('description', '') or ''
         stars = repo['stargazers_count']
+        language = repo.get('language', '') or ''
 
         clone_data = get_traffic_data(username, repo_name, 'clones', headers)
         view_data = get_traffic_data(username, repo_name, 'views', headers)
@@ -62,7 +92,8 @@ def get_all_time_stats(username, token):
             'description': description,
             'stars': stars,
             'clones': clones,
-            'visitors': unique_views
+            'visitors': unique_views,
+            'language': language
         })
 
     return {
@@ -96,7 +127,8 @@ def generate_repo_list(stats):
     ]
 
     for repo in sorted_repos:
-        name_cell = f'[{repo["name"]}]({repo["url"]})'
+        badge = language_badge(repo['language'])
+        name_cell = f'{badge} [{repo["name"]}]({repo["url"]})' if badge else f'[{repo["name"]}]({repo["url"]})'
         if repo['description']:
             name_cell += f'<br><sub>{repo["description"]}</sub>'
         lines.append(
