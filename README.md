@@ -13,6 +13,8 @@
 
 [🌐 wwel.sh](https://wwel.sh) • [💻 Git](https://git.wwel.sh) •[💬 Chat](https://chat.wwel.sh) • [🎨 Gallery](https://gallery.wwel.sh) • [✉️ Email](mailto:hello@wwel.sh)
 
+[🛜 Uptime Check](https://wwelsh.up.railway.app/status/uptime)
+
 <br>
 
 <!-- GITHUB_STATS:START -->
