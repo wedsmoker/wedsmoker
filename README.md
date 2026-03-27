@@ -23,6 +23,8 @@
 
 [![Python](https://img.shields.io/badge/Python-306998?style=flat-square&logo=python&logoColor=white)](https://python.org) [![JavaScript](https://img.shields.io/badge/JavaScript-f0db4f?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org) [![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)](https://isocpp.org) [![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](https://kotlinlang.org) [![Rust](https://img.shields.io/badge/Rust-2c2c2c?style=flat-square&logo=rust&logoColor=white)](https://rust-lang.org)
 
+[![proxmox overview](https://vitals.wwel.sh/badge/proxmox/master.svg)](https://github.com/usr-wwelsh/vitalSVG)
+
 </div>
 
 
