@@ -1,6 +1,7 @@
 <div align="center">
   
-![header](https://capsule-render.vercel.app/api?type=waving&color=7F52FF&height=200&section=header&text=William%20Welsh&fontSize=70&fontColor=ffffff&animation=fadeIn)
+
+[![SVG Banners](https://svg-banners.vercel.app/api?type=luminance&text1=William%20Welsh&width=800&height=100)](https://github.com/Akshay090/svg-banners)
 
 
 *Software ownership shouldn't cost money.*
