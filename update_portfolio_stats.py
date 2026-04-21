@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
-"""
-Updates portfolio HTML with GitHub repository stats
-Generates HTML table with top 10 repos by clones and unique visitors
-"""
 import requests
 import sys
 import os
+import json
 from datetime import datetime
 
 def get_traffic_data(username, repo_name, traffic_type, headers):
@@ -91,69 +88,56 @@ def generate_clone_total_snippet(stats):
     )
 
 def generate_html_table(stats):
-    """Generate HTML definition lists with top 10 repos by clones and unique visitors"""
-
     repo_stats = stats.get('repo_stats', [])
-
-    # Get top 10 by clones
     top_clones = sorted(repo_stats, key=lambda x: x['clones'], reverse=True)[:10]
-
-    # Get top 10 by unique visitors
     top_visitors = sorted(repo_stats, key=lambda x: x['visitors'], reverse=True)[:10]
 
-    # Generate HTML
     html = '<!-- PORTFOLIO_STATS:START -->\n\n'
+    html += '<div class="col-header">Most Cloned (last 2 weeks)</div>\n\n'
 
-    # Top 10 by Clones
-    html += '<h3>Most Cloned (last 2 weeks)</h3>\n'
+    for repo in top_clones:
+        desc = repo['description'] or 'No description'
+        html += '<div class="repo-card">\n'
+        html += f'  <div><a href="{repo["url"]}">{repo["name"]}</a></div>\n'
+        html += f'  <div class="desc">{desc}</div>\n'
+        html += f'  <div class="meta"><kbd>{repo["clones"]} Clones</kbd> / <kbd>{repo["unique_cloners"]} Unique Cloners</kbd></div>\n'
+        html += '</div>\n\n'
 
-    for i, repo in enumerate(top_clones, 1):
-        name = repo['name']
-        url = repo['url']
-        desc = repo['description'] if repo['description'] else 'No description'
-        clones = repo['clones']
-        unique_cloners = repo['unique_cloners']
+    html += '<hr class="section-divider">\n'
+    html += '<div class="col-header">Most Visited (last 2 weeks)</div>\n\n'
 
-        html += '<blockquote>\n'
-        html += '<table width="100%" border="1" cellpadding="10" cellspacing="0" bgcolor="#ffffff">\n'
-        html += '<tr><td>\n'
-        html += '<dl>\n'
-        html += f'  <dt><a href="{url}"><b>{name}</b></a></dt>\n'
-        html += f'  <dd>{desc}</dd>\n'
-        html += f'  <dd><small><i>Status: <kbd>{clones} Clones</kbd> / <kbd>{unique_cloners} Unique Cloners</kbd></i></small></dd>\n'
-        html += '</dl>\n'
-        html += '</td></tr>\n'
-        html += '</table>\n'
-        html += '</blockquote>\n'
+    for repo in top_visitors:
+        desc = repo['description'] or 'No description'
+        html += '<div class="repo-card">\n'
+        html += f'  <div><a href="{repo["url"]}">{repo["name"]}</a></div>\n'
+        html += f'  <div class="desc">{desc}</div>\n'
+        html += f'  <div class="meta"><kbd>{repo["visitors"]} Visitors</kbd> / <kbd>{repo["clones"]} Clones</kbd></div>\n'
+        html += '</div>\n\n'
 
-    html += '<hr size="1" noshade>\n'
-
-    # Top 10 by Unique Visitors
-    html += '<h3>Most Visited (last 2 weeks)</h3>\n'
-
-    for i, repo in enumerate(top_visitors, 1):
-        name = repo['name']
-        url = repo['url']
-        desc = repo['description'] if repo['description'] else 'No description'
-        clones = repo['clones']
-        visitors = repo['visitors']
-
-        html += '<blockquote>\n'
-        html += '<table width="100%" border="1" cellpadding="10" cellspacing="0" bgcolor="#ffffff">\n'
-        html += '<tr><td>\n'
-        html += '<dl>\n'
-        html += f'  <dt><a href="{url}"><b>{name}</b></a></dt>\n'
-        html += f'  <dd>{desc}</dd>\n'
-        html += f'  <dd><small><i>Status: <kbd>{visitors} Visitors</kbd> / <kbd>{clones} Clones</kbd></i></small></dd>\n'
-        html += '</dl>\n'
-        html += '</td></tr>\n'
-        html += '</table>\n'
-        html += '</blockquote>\n'
-
-    html += f'<p align="right"><small>Last updated: {stats["last_updated"]}</small></p>\n'
+    html += f'<div class="timestamp">Last updated: {stats["last_updated"]}</div>\n'
     html += '<!-- PORTFOLIO_STATS:END -->'
 
     return html
+
+
+def write_stats_json(stats, output_dir):
+    repo_stats = stats.get('repo_stats', [])
+    top_clones = sorted(repo_stats, key=lambda x: x['clones'], reverse=True)[:10]
+    total_clones = sum(r['clones'] for r in repo_stats)
+    total_unique = sum(r['unique_cloners'] for r in repo_stats)
+
+    data = {
+        'last_updated': stats['last_updated'],
+        'total_clones': total_clones,
+        'total_unique_cloners': total_unique,
+        'repos': top_clones
+    }
+
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, 'stats.json')
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2)
+    print(f"Stats JSON written to {output_path}")
 
 def update_portfolio(stats, portfolio_path):
     """Update portfolio HTML with stats table"""
@@ -206,13 +190,15 @@ def main():
         username = sys.argv[1]
         token = sys.argv[2]
         portfolio_path = sys.argv[3]
+        data_dir = sys.argv[4] if len(sys.argv) >= 5 else os.path.join(os.path.dirname(portfolio_path), 'data')
     else:
         username = os.environ.get('GITHUB_USERNAME')
         token = os.environ.get('GITHUB_TOKEN')
         portfolio_path = os.environ.get('PORTFOLIO_PATH', 'index.html')
+        data_dir = os.path.join(os.path.dirname(portfolio_path), 'data')
 
     if not username or not token:
-        print("Usage: python update_portfolio_stats.py <username> <token> <portfolio_path>")
+        print("Usage: python update_portfolio_stats.py <username> <token> <portfolio_path> [data_dir]")
         print("Example: python update_portfolio_stats.py usr-wwelsh ghp_xxx /path/to/index.html")
         sys.exit(1)
 
@@ -221,6 +207,7 @@ def main():
 
     if stats:
         update_portfolio(stats, portfolio_path)
+        write_stats_json(stats, data_dir)
     else:
         print("Failed to fetch stats")
         sys.exit(1)
