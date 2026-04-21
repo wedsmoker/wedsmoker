@@ -14,11 +14,6 @@ def parse_date_lookback(filename):
     return None, None
 
 
-def find_latest_digest(digests_dir):
-    files = sorted(Path(digests_dir).glob('*.md'), reverse=True)
-    return files[0] if files else None
-
-
 def extract_section(content, section_name):
     pattern = rf'## {re.escape(section_name)}\n(.*?)(?=\n## |\Z)'
     match = re.search(pattern, content, re.DOTALL)
@@ -62,11 +57,11 @@ def extract_repo_names(per_repo_content):
     return re.findall(r'^### (.+)$', per_repo_content, re.MULTILINE)
 
 
-def generate_digest_html(date, lookback, summary_text, per_repo_text):
+def generate_digest_entry(date, lookback, summary_text, per_repo_text):
     summary_html = md_to_html(summary_text)
     per_repo_html = md_to_html(per_repo_text)
 
-    html = '<!-- DIGEST_FEED:START -->\n'
+    html = '<div class="digest-entry">\n'
     html += '<div class="digest-header">\n'
     html += f'  <span class="digest-date">{date}</span>\n'
     html += f'  <span class="digest-badge">{lookback}d lookback</span>\n'
@@ -80,7 +75,7 @@ def generate_digest_html(date, lookback, summary_text, per_repo_text):
     html += per_repo_html + '\n'
     html += '  </div>\n'
     html += '</details>\n'
-    html += '<!-- DIGEST_FEED:END -->'
+    html += '</div>\n'
 
     return html
 
@@ -101,19 +96,12 @@ def inject_into_html(html_path, new_section, start_marker, end_marker):
         f.write(new_content)
 
 
-def write_digest_json(output_dir, date, lookback, filename, summary, repo_names):
+def write_digests_json(output_dir, entries):
     os.makedirs(output_dir, exist_ok=True)
-    data = {
-        'date': date,
-        'lookback': lookback,
-        'filename': filename,
-        'summary': summary,
-        'repos': [f'usr-wwelsh/{r}' for r in repo_names]
-    }
-    output_path = os.path.join(output_dir, 'digest-latest.json')
+    output_path = os.path.join(output_dir, 'digests.json')
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2)
-    print(f"Digest JSON written to {output_path}")
+        json.dump(entries, f, indent=2)
+    print(f"Digests JSON written to {output_path}")
 
 
 def main():
@@ -125,28 +113,44 @@ def main():
     html_path = sys.argv[2]
     data_dir = sys.argv[3]
 
-    latest = find_latest_digest(digests_dir)
-    if not latest:
+    files = sorted(Path(digests_dir).glob('*.md'), reverse=True)
+    if not files:
         print(f"No digest files found in {digests_dir}")
         sys.exit(0)
 
-    date, lookback = parse_date_lookback(latest.name)
-    if not date:
-        print(f"Could not parse date from {latest.name}")
-        sys.exit(1)
+    entries = []
+    html_entries = []
 
-    with open(latest, 'r', encoding='utf-8') as f:
-        content = f.read()
+    for f in files:
+        date, lookback = parse_date_lookback(f.name)
+        if not date:
+            print(f"Skipping {f.name}: could not parse date")
+            continue
 
-    summary = extract_section(content, 'Summary')
-    per_repo = extract_section(content, 'Per-Repo Activity')
-    repo_names = extract_repo_names(per_repo)
+        with open(f, 'r', encoding='utf-8') as fh:
+            content = fh.read()
 
-    digest_html = generate_digest_html(date, lookback, summary, per_repo)
-    inject_into_html(html_path, digest_html, '<!-- DIGEST_FEED:START -->', '<!-- DIGEST_FEED:END -->')
-    write_digest_json(data_dir, date, lookback, latest.name, summary, repo_names)
+        summary = extract_section(content, 'Summary')
+        per_repo = extract_section(content, 'Per-Repo Activity')
+        repo_names = extract_repo_names(per_repo)
 
-    print(f"Digest feed updated from {latest.name}")
+        html_entries.append(generate_digest_entry(date, lookback, summary, per_repo))
+        entries.append({
+            'date': date,
+            'lookback': lookback,
+            'filename': f.name,
+            'summary': summary,
+            'repos': [f'usr-wwelsh/{r}' for r in repo_names],
+        })
+
+    feed_html = '<!-- DIGEST_FEED:START -->\n'
+    feed_html += '\n'.join(html_entries)
+    feed_html += '<!-- DIGEST_FEED:END -->'
+
+    inject_into_html(html_path, feed_html, '<!-- DIGEST_FEED:START -->', '<!-- DIGEST_FEED:END -->')
+    write_digests_json(data_dir, entries)
+
+    print(f"Digest feed updated: {len(entries)} entries")
 
 
 if __name__ == '__main__':
