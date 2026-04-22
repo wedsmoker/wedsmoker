@@ -90,7 +90,6 @@ def generate_clone_total_snippet(stats):
 def generate_html_table(stats):
     repo_stats = stats.get('repo_stats', [])
     top_clones = sorted(repo_stats, key=lambda x: x['clones'], reverse=True)[:10]
-    top_visitors = sorted(repo_stats, key=lambda x: x['visitors'], reverse=True)[:10]
 
     html = '<!-- PORTFOLIO_STATS:START -->\n\n'
     html += '<div class="col-header">Most Cloned (last 2 weeks)</div>\n\n'
@@ -101,17 +100,6 @@ def generate_html_table(stats):
         html += f'  <div><a href="{repo["url"]}">{repo["name"]}</a></div>\n'
         html += f'  <div class="desc">{desc}</div>\n'
         html += f'  <div class="meta"><kbd>{repo["clones"]} Clones</kbd> / <kbd>{repo["unique_cloners"]} Unique Cloners</kbd></div>\n'
-        html += '</div>\n\n'
-
-    html += '<hr class="section-divider">\n'
-    html += '<div class="col-header">Most Visited (last 2 weeks)</div>\n\n'
-
-    for repo in top_visitors:
-        desc = repo['description'] or 'No description'
-        html += '<div class="repo-card">\n'
-        html += f'  <div><a href="{repo["url"]}">{repo["name"]}</a></div>\n'
-        html += f'  <div class="desc">{desc}</div>\n'
-        html += f'  <div class="meta"><kbd>{repo["visitors"]} Visitors</kbd> / <kbd>{repo["clones"]} Clones</kbd></div>\n'
         html += '</div>\n\n'
 
     html += f'<div class="timestamp">Last updated: {stats["last_updated"]}</div>\n'
