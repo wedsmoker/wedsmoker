@@ -42,13 +42,6 @@ jobs:
           cd stats-repo
           python update_portfolio_stats.py $GITHUB_USERNAME $GITHUB_TOKEN ../portfolio/index.html
 
-      - name: Update digest feed
-        env:
-          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN }}
-        run: |
-          cd stats-repo
-          python update_digest_feed.py ../portfolio/digests/ ../portfolio/index.html ../portfolio/data/
-
       - name: Commit and push portfolio changes
         run: |
           cd portfolio
