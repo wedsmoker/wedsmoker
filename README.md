@@ -73,5 +73,5 @@
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="16" height="16"> [ShoobyPy](https://github.com/usr-wwelsh/ShoobyPy)<br><sub>Shooby Python Scat Singer</sub> | 2025-06-13 | 0 | 6 | 0 |
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="16" height="16"> [path-of-python](https://github.com/usr-wwelsh/path-of-python)<br><sub>Assets from https://opengameart.org/content/dungeon-crawl-32x32-tiles</sub> | 2025-06-10 | 1 | 14 | 0 |
 
-*updated: 2026-04-26 02:57 UTC — sorted by creation date, newest first*
+*updated: 2026-04-27 03:22 UTC — sorted by creation date, newest first*
 <!-- AUTO_REPO_LIST:END -->
