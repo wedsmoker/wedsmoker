@@ -194,7 +194,6 @@ def main():
     stats = get_all_repo_stats(username, token)
 
     if stats:
-        update_portfolio(stats, portfolio_path)
         write_stats_json(stats, data_dir)
     else:
         print("Failed to fetch stats")
