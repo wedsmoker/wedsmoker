@@ -28,6 +28,10 @@ def get_all_repo_stats(username, token):
         'Accept': 'application/vnd.github.v3+json'
     }
 
+    user_url = f'https://api.github.com/users/{username}'
+    user_response = requests.get(user_url, headers=headers)
+    public_repo_count = user_response.json().get('public_repos', 0) if user_response.status_code == 200 else 0
+
     repos_url = 'https://api.github.com/user/repos?per_page=100&type=owner'
     response = requests.get(repos_url, headers=headers)
 
@@ -73,6 +77,7 @@ def get_all_repo_stats(username, token):
 
     return {
         'repo_stats': repo_stats,
+        'public_repo_count': public_repo_count,
         'last_updated': est_time.strftime('%Y-%m-%d %H:%M EST')
     }
 
@@ -116,6 +121,7 @@ def write_stats_json(stats, output_dir):
 
     data = {
         'last_updated': stats['last_updated'],
+        'public_repo_count': stats.get('public_repo_count', 0),
         'total_clones': total_clones,
         'total_unique_cloners': total_unique,
         'repos': top_clones
