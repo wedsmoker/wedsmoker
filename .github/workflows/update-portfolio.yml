@@ -51,7 +51,7 @@ jobs:
 
           # Check if there are changes
           if ! git diff --quiet --staged; then
-            git commit -m "Update GitHub stats [skip ci]"
+            git commit -m "Update GitHub stats"
             git push
             echo "Portfolio updated successfully"
           else
