@@ -5,6 +5,9 @@ import os
 import json
 from datetime import datetime
 
+# Repos to hide from the public portfolio (e.g. one-off demos)
+EXCLUDE_REPOS = {'refundesk'}
+
 def get_traffic_data(username, repo_name, traffic_type, headers):
     """Helper function to fetch traffic data from GitHub API"""
     url = f"https://api.github.com/repos/{username}/{repo_name}/traffic/{traffic_type}"
@@ -43,7 +46,7 @@ def get_all_repo_stats(username, token):
     repo_stats = []
 
     for repo in repos:
-        if repo['fork'] or repo['private']:
+        if repo['fork'] or repo['private'] or repo['name'] in EXCLUDE_REPOS:
             continue
 
         repo_name = repo['name']

@@ -9,6 +9,9 @@ import os
 from datetime import datetime
 
 
+# Repos to hide from the public README list (e.g. one-off demos)
+EXCLUDE_REPOS = {'refundesk'}
+
 _DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons'
 
 LANGUAGE_ICONS = {
@@ -70,7 +73,7 @@ def get_all_time_stats(username, token):
     repo_stats = []
 
     for repo in repos:
-        if repo['fork'] or repo['private']:
+        if repo['fork'] or repo['private'] or repo['name'] in EXCLUDE_REPOS:
             continue
 
         repo_name = repo['name']
