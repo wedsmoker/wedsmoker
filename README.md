@@ -30,9 +30,10 @@
 
 
 <!-- AUTO_REPO_LIST:START -->
-### All Public Repositories (42 total)
+### All Public Repositories (43 total)
 | Repository | Created | ⭐ | 📊 Clones (14d) | 👥 Visitors (14d) |
 |:-----------|:-------:|---:|----------------:|------------------:|
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" width="16" height="16"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="16" height="16"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="16" height="16"> [go-course](https://github.com/usr-wwelsh/go-course)<br><sub>Learn Go by writing it. Ten hands-on chapters, browser-based, graded live by a Go interpreter compiled to WebAssembly. No signup, no server, no cloud.</sub> | 2026-08-19 | 0 | 0 | 0 |
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" width="16" height="16"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg" width="16" height="16"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="16" height="16"> [fanoutd](https://github.com/usr-wwelsh/fanoutd)<br><sub>Self-hosted multi-agent orchestrator — kanban board and CLI in two Go binaries, embedded UI, SQLite state, OpenRouter models. Breaks an idea into subtasks that run in parallel with file ownership enforced.</sub> | 2026-07-29 | 0 | 109 | 3 |
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="16" height="16"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg" width="16" height="16"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="16" height="16"> [Blopple](https://github.com/usr-wwelsh/Blopple)<br><sub>No-code Doom-style game maker: build maps, textures, and music in the browser, ship a self-contained ~1MB playable HTML.</sub> | 2026-07-12 | 2 | 38 | 1 |
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" width="16" height="16"> [git-digest](https://github.com/usr-wwelsh/git-digest)<br><sub>Turn your git commits into an AI-written dev journal. Cloud-optional, single binary.</sub> | 2026-06-29 | 0 | 37 | 0 |
@@ -76,5 +77,5 @@
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="16" height="16"> [ShoobyPy](https://github.com/usr-wwelsh/ShoobyPy)<br><sub>Shooby Python Scat Singer</sub> | 2025-06-13 | 0 | 5 | 0 |
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="16" height="16"> [path-of-python](https://github.com/usr-wwelsh/path-of-python)<br><sub>Assets from https://opengameart.org/content/dungeon-crawl-32x32-tiles</sub> | 2025-06-10 | 1 | 13 | 0 |
 
-*updated: 2026-08-19 01:20 UTC — sorted by creation date, newest first*
+*updated: 2026-08-20 01:19 UTC — sorted by creation date, newest first*
 <!-- AUTO_REPO_LIST:END -->
